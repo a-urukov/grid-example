@@ -2,8 +2,16 @@
   "name": "grid-example",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --content-base src --display-reasons --display-chunks --progress --hot --port 8888",
+    "build": "./node_modules/.bin/webpack --config webpack.config.js --build --display-reasons --progress --bail"
+  },
   "dependencies": {
+    "babel-core": "^6.7.6",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-syntax-class-properties": "^6.5.0",
+    "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -16,6 +24,9 @@
     "react": "15.0.1",
     "react-addons-shallow-compare": "^0.14.0 || ^15.0.0",
     "react-dom": "^0.14.0 || ^15.0.0",
-    "react-virtualized": "6.1.2"
+    "react-transform-hmr": "^1.0.4",
+    "react-virtualized": "6.1.2",
+    "webpack": "^1.12.15",
+    "webpack-dev-server": "^1.14.1"
   }
 }

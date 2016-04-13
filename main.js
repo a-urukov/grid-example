@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {GridExample} from './main2.js';
+import GridExample from './main2.js';
 
 // Grid data as an array of arrays
 const list = [
     ['Brian Vaughn', 'Software Engineer', 'Sunnyvale', 'CA', 94086 /* ... */]
     // And so on...
 ];
-
-
 
 // Render your grid
 ReactDOM.render(
