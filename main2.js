@@ -45,7 +45,7 @@ export default class GridExample extends Component {
     }
 
     render() {
-        const { list, ...props } = this.props
+        const { list } = this.props
 
         const {
             columnsCount,
