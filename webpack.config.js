@@ -43,6 +43,7 @@ function createWebpackConfig(options) {
             new webpack.optimize.UglifyJsPlugin()
         ];
         config.devtool = 'source-map';
+        process.env.NODE_ENV = 'production';
     }
 
     util._extend(config, {
