@@ -1,23 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GridExample from './main2.js';
+import Immutable from 'immutable';
 
 // Grid data as an array of arrays
-const list = [
-    ['Brian Vaughn', 'Software Engineer', 'Sunnyvale', 'CA', 94086 /* ... */]
-    // And so on...
-];
+let list = Immutable.List((function() {
+        const count = 100;
+        let res = [];
+
+        for (let i = 0; i < count; i++) {
+            res.push({
+                title: 'Кампания №' + (i + 1),
+                num: Math.round(Math.random() * 10e7),
+                ctr: Math.random(),
+                color: '#' + i + '22' + i
+            });
+        }
+
+        return res;
+    }()));
 
 // Render your grid
 ReactDOM.render(
     <GridExample
-        width={300}
-        height={300}
-        columnWidth={100}
-        rowHeight={30}
-        columnsCount={list.length}
-        rowsCount={list.length}
-        renderCell={({ columnIndex, rowIndex }) => list[rowIndex][columnIndex]}
+        list = {list}
     />,
     document.getElementById('example')
 );

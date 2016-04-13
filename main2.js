@@ -1,5 +1,6 @@
 /** @flow */
 import Immutable from 'immutable'
+import ReactDOM from 'react-dom'
 import React, {Component, PropTypes} from 'react'
 //import {ContentBox, ContentBoxHeader, ContentBoxParagraph} from './demo/ContentBox'
 //import {LabeledInput, InputRow} from './demo/LabeledInput'
@@ -7,6 +8,35 @@ import React, {Component, PropTypes} from 'react'
 import { Grid } from 'react-virtualized'
 import shallowCompare from 'react-addons-shallow-compare'
 import cn from 'classnames'
+
+function createMarkup() {
+    return { __html: 'First &middot; Second' };
+};
+
+class BEMTHLCell extends Component {
+
+
+    render() {
+        return <span
+            dangerouslySetInnerHTML={this.html}
+        />
+    }
+
+    componentWillMount() {
+
+        this.html = { __html: BEMHTML.apply({ block: 'button', content: this.props.title }) };
+    }
+
+    componentDidMount() {
+        let elem = ReactDOM.findDOMNode(this);
+
+        this.bem = $(elem.children[0]).bem('button');
+    }
+
+    componentWillUnmount() {
+        BEM.DOM.destruct(this.bem.domElem);
+    }
+}
 
 
 export default class GridExample extends Component {
@@ -19,16 +49,16 @@ export default class GridExample extends Component {
         super(props, context)
 
         this.state = {
-            columnWidth: 100,
-            columnsCount: 1000,
+            columnsCount: 5,
             height: 300,
             overscanColumnsCount: 0,
             overscanRowsCount: 5,
             rowHeight: 40,
-            rowsCount: 1000,
+            rowsCount: 100,
             scrollToColumn: undefined,
             scrollToRow: undefined,
-            useDynamicRowHeight: false
+            useDynamicRowHeight: false,
+            width: 600
         }
 
         this._getColumnWidth = this._getColumnWidth.bind(this);
@@ -56,6 +86,7 @@ export default class GridExample extends Component {
             rowsCount,
             scrollToColumn,
             scrollToRow,
+            width,
             useDynamicRowHeight
         } = this.state
 
@@ -87,11 +118,13 @@ export default class GridExample extends Component {
             case 0:
                 return 50
             case 1:
-                return 100
+                return 200
             case 2:
-                return 300
+                return 200
+            case 3:
+                return 150
             default:
-                return 50
+                return 100
         }
     }
 
@@ -125,10 +158,15 @@ export default class GridExample extends Component {
 
         switch (columnIndex) {
             case 1:
-                content = datum.name
+                content = datum.title;
                 break
             case 2:
-                content = datum.random
+                content = 'Номер: ' + datum.num;
+                break
+            case 3:
+                content = <BEMTHLCell
+                    title = {datum.title}
+                />
                 break
             default:
                 content = `${rowIndex}, ${columnIndex}`
@@ -165,7 +203,7 @@ export default class GridExample extends Component {
                 className={classNames}
                 style={style}
             >
-                {datum.name.charAt(0)}
+                {rowIndex}
             </div>
         )
     }
