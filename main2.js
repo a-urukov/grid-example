@@ -24,7 +24,45 @@ class BEMTHLCell extends Component {
 
     componentWillMount() {
 
-        this.html = { __html: BEMHTML.apply({ block: 'button', content: this.props.title }) };
+        this.html = { __html: BEMHTML.apply({
+            block: 'select', // имя блока
+            name: 'mail', // имя контрола для отправки на сервер
+            mods: { size: 'm', theme: 'normal' }, // модификаторы блока. Модификаторы темы и размера – обязательные
+            content: [ // содержимое блока
+                { // кнопка блока
+                    block: 'button',
+                    content: 'Отправленные' // текст кнопки (отображает выбранный пункт списка)
+                },
+                {
+                    elem: 'control', // нативный список
+                    content: [ // массив элементов `option` и `option-group`
+                        {
+                            elem: 'option', // пункт выпадающего списка
+                            attrs: { value: 'send' }, // атрибуты списка. value – обязательный
+                            content: 'Отправленные' // название пункта
+                        },
+                        {
+                            elem: 'option',
+                            attrs: { value: 'draft' },
+                            content: 'Черновики'
+                        },
+                        {
+                            elem: 'option-group', // элемент группы
+                            attrs: { label: 'Тут группа' }, // заголовок группы
+                            content: [ // массив элементов `option`, принадлежащих группе
+                                {
+                                    elem: 'option',
+                                    attrs: { value: 'tvc' },
+                                    content: 'ТВЦ'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        })
+        };
+
     }
 
     componentDidMount() {

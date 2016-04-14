@@ -26,6 +26,8 @@
     "react-dom": "^0.14.0 || ^15.0.0",
     "react-transform-hmr": "^1.0.4",
     "react-virtualized": "6.1.2",
+    "socket.io": "^1.4.5",
+    "socket.io-client": "^1.4.5",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1"
   }
